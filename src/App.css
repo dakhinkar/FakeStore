@@ -1,0 +1,203 @@
+* {
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+.ui.secondary.menu {
+  background: 0 0;
+  margin-top: 6rem;
+  margin-left: 4.642857em;
+}
+.ui.cards > .card > .image {
+  height: 250px;
+  padding: 20px;
+  background: #fff;
+  margin: auto;
+}
+.ui.cards > .card > .image > img {
+  height: 100%;
+  max-width: 100%;
+  width: auto;
+}
+.ui.cards > .card > .content > .header {
+  height: 48px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.ui.cards > .card > .content > .description {
+  height: 36px;
+  margin-bottom: 0px;
+  overflow: hidden;
+}
+.ui.cards > .card .meta.price {
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+.ui.cards > .card .meta.price > a {
+  font-size: 1.3rem;
+  color: #222;
+}
+
+.ui.menu.fixed {
+  height: 60px;
+  /* padding-top: 15px; */
+}
+
+.ui.grid.container {
+  margin-top: 45px;
+}
+
+.ui.grid > .row {
+  background: #fff;
+}
+.ui.grid > .row > .column.lp {
+  padding: 20px 40px 20px 20px;
+  align-self: flex-start !important;
+}
+.ui.grid > .row > .column.rp {
+  padding: 20px 20px 20px 40px;
+  text-align: left;
+  align-self: flex-start !important;
+}
+
+.ui.grid > .row > .column > img,
+.ui.grid > .row > img {
+  height: 40%;
+}
+.ui.placeholder .header:not(:first-child):before,
+.ui.placeholder .image:not(:first-child):before,
+.ui.placeholder .paragraph:not(:first-child):before {
+  display: none;
+}
+
+.ui.label,
+.ui.labels .label {
+  font-size: 22px;
+}
+
+.column.rp h1 {
+  color: #333;
+}
+.column.rp p {
+  font-size: 18px;
+  color: #777;
+}
+.ui.placeholder.segment .column .button,
+.ui.placeholder.segment .column .field,
+.ui.placeholder.segment .column textarea,
+.ui.placeholder.segment .column > .ui.input {
+  /* background-color: #ff3e6c; */
+  /* border: 1px solid #ff3e6c; */
+  /* color: #fff; */
+  font-size: 14px;
+  margin-left: 0;
+}
+.ui.placeholder.segment.column.button{
+  margin-right: 5px;
+}
+
+element.style {
+}
+.ui.card>.button, .ui.card>.buttons, .ui.cards>.card>.button, .ui.cards>.card>.buttons {
+    margin: 0 -1px;
+    width: calc(100% + 2px);
+}
+.ui.button{
+  border-bottom: 1px solid lightgrey;
+}
+.ui.menu:not(.vertical) .right.item, .ui.menu:not(.vertical) .right.menu {
+    display: flex;
+    margin-left: auto!important;
+    /* margin-top: 10px; */
+    justify-content: center;
+    align-items: center;
+}
+
+.count{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: red;
+    color: white;
+    outline: 2px solid white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+/* border: none;
+    position: absolute;
+    top: 0px;
+    right: 9px;
+    width: 20px;
+    height: 20px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+} */
+
+.ui.column.grid>[class*="four wide"].column, .ui.grid>.column.row>[class*="four wide"].column, .ui.grid>.row>[class*="four wide"].column, .ui.grid>[class*="four wide"].column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+.login, .sign{
+  min-width: 20rem;
+  border: 1px solid lightgray;
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.login input, .sign input{
+  width: 20rem;
+}
+
+.ui.block.header{
+  width: 100%;
+  text-align: center;
+}
+.footer{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: red; */
+}
+.footer button{
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: blue;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.footer a{
+  text-decoration: underline;
+  cursor: pointer;
+  color: #777;
+}
+p{
+  font-size: 3.5rem;
+  font-weight: 400;
+  font-style: italic;
+}
