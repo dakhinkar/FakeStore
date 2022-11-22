@@ -1,6 +1,6 @@
 
 import './App.css';
-import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, useParams, useLocation, useNavigate } from "react-router-dom";
 import Header from './containers/Header';
 import CategoryHeader from './containers/CategoryHeader';
 import ProductListinig from './containers/ProductListing';
@@ -10,7 +10,12 @@ import FavProducts from './containers/pages/FavProducts';
 import CartProducts from './containers/pages/CartProducts';
 import Sign from './containers/pages/Sign';
 import Login from './containers/pages/Login';
-const App = () =>{
+import Inventory from './containers/pages/Inventory';
+import { useSelector } from 'react-redux';
+
+const App = () => {
+    // let location = useLocation();
+    // console.log(location.pathname);
     return (
         <div >
             <Router>
@@ -20,6 +25,10 @@ const App = () =>{
                     <Route
                         path='/' exact
                         element={<ProductListinig />}
+                    />
+                    <Route
+                        path='/inventory' exact
+                        element={<Inventory />}
                     />
                     <Route
                         path='/user/signin/' exact
@@ -47,5 +56,6 @@ const App = () =>{
         </div>
     )
 }
+
 
 export default App;

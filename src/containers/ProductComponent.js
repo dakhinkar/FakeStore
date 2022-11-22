@@ -11,21 +11,27 @@ const ProductComponent = ({data}) => {
   let products = useSelector((state) => state.allProducts.products);
   const cart = useSelector((state) => state.cart);
   const fav = useSelector((state) => state.favourite);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   if (data) {
     products = data;
   }
     // const { id, title } = product[0];
   const renderList = products.map((product) => {
-    const { id, title, image, price, category } = product;
-    let cardContains = cart.filter(c => c.id == id );
-    let favContains = fav.filter(c => c.id == id);
-    console.log(cardContains);
+
+    const { _id, title, image, price, category } = product;
+    let cardContains = cart.filter(c => c._id === _id );
+    let favContains = fav.filter(c => c._id === _id);
+    // console.log('product: ', product)
+    // console.log("card contains: filter :  ", cardContains);
     cardContains = cardContains.length == 0 ? false : true;
     favContains = favContains.length == 0 ? false : true;
     const addToChartHandler = (e) => {
       e.stopPropagation();
       e.preventDefault();
+      if (!user.token) {
+        return;
+      }
       console.log("cart : ", cart);
       if (cardContains) {
         console.log("remove from cart");
@@ -38,8 +44,12 @@ const ProductComponent = ({data}) => {
     const addToFavHandler = (e) => {
       e.stopPropagation();
       e.preventDefault();
+       if (!user.token) {
+        return;
+      }
       if (favContains) {
         console.log("remove from fav");
+        console.log("remove from fav  lnlklkjlkjlk: ",product);
         dispatch(removeFromFav(product));
       } else {
         console.log("add to fav");
@@ -47,8 +57,8 @@ const ProductComponent = ({data}) => {
       }
     }
     return (
-      <div className="four wide column" key={id}>
-        <Link to={`/product/${id}`}>
+      <div className="four wide column" key={_id}>
+        <Link to={`/product/${_id}`}>
           <div className="ui link cards">
             <div className="card">
                
@@ -61,13 +71,13 @@ const ProductComponent = ({data}) => {
                 </div>
                 <div className="meta">{category}</div>
               </div>
-              <button class={`ui toggle button ${cardContains ? 'red': ""}`} onClick={(e) => addToChartHandler(e)}>
+              <button class={`ui toggle button ${user.token && cardContains ? 'red': ""}`} onClick={(e) => addToChartHandler(e)}>
                 <i class="shop icon"></i>
-                {cardContains ? 'remove from cart': "Add to Cart"}
+                {user.token && cardContains ? 'remove from cart': "Add to Cart"}
               </button>
-              <button class={`ui toggle button ${favContains ? 'teal': ""}`} onClick={(e) => addToFavHandler(e)}>
-                <i class={`like icon ${favContains ? 'red': ""}`}></i>
-                {favContains ? 'remove from favourite': "Add to favourite"}
+              <button class={`ui toggle button ${user.token && favContains ? 'teal': ""}`} onClick={(e) => addToFavHandler(e)}>
+                <i class={`like icon ${user.token && favContains ? 'red': ""}`}></i>
+                {user.token && favContains ? 'remove from favourite': "Add to favourite"}
               </button>
             </div>
           </div>

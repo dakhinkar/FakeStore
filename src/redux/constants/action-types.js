@@ -11,5 +11,7 @@ export const ActionTypes = {
     ADD_CART: "ADD_CART",
     REMOVE_CART: "REMOVE_CART",
     ADD_FAV: "ADD_FAV",
-    REMOVE_FAV: "REMOVE_FAV"
+    REMOVE_FAV: "REMOVE_FAV",
+    SET_USER: "SET_USER",
+    RESET_USER: "RESET_USER"
 }

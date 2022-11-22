@@ -1,17 +1,29 @@
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutHandler } from "../redux/actions/productAction";
 const Header = () => {
     const cart = useSelector((state) => state.cart);
+    const user = useSelector((state) => state.user);
+    const { token, email, username} = user;
     const cartCount = cart.length;
     const favourite = useSelector((state) => state.favourite);
     const favCount = favourite.length;
+    const dispatch = useDispatch();
+    const logout = (e) => {
+        e.preventDefault();
+        dispatch(logoutHandler());
+    }
     return (
         <div className="ui fixed menu">
             <Link to={"/"} >
                 <h2 class="item">FakeShop</h2>
             </Link>
+           
             <div class="right menu">
-                <Link to={"/user/products/shopping/"}>
+                {/* <Link to={"/inventory"} >
+                    <a class="ui item">Inventory</a>
+                </Link> */}
+                { token && <><Link to={"/user/products/shopping/"}>
                     <a class="ui item counter">
                         <i class="shop icon"></i>
                         <button class="count">{cartCount}</button>
@@ -23,17 +35,19 @@ const Header = () => {
                          <button className="count">{favCount}</button>
                     </a>
                 </Link>
+                </>
+                }
                 
-                <Link to={"/user/signin/"}>
+               {!token && <> <Link to={"/user/signin/"}>
                     <a class="ui item">Sign In</a>
                 </Link>
                 <Link to={"/user/login/"}>
                      <a class="ui item">Log In</a>
-                </Link>
+                </Link> </>}
                 
-                <a class="ui item">
+                {token && <a class="ui item" onClick={(e) => logout(e)} >
                     Logout
-                </a>
+                </a>}
             </div>
         </div>
     )

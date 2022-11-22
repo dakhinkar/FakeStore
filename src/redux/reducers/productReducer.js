@@ -41,7 +41,7 @@ export const cartReducer = (state = [], { type, payload }) => {
         case ActionTypes.ADD_CART:
             return [...state, payload];
         case ActionTypes.REMOVE_CART:
-            return [...state.filter((s) => s.id != payload.id)];
+            return [...state.filter((s) => s._id != payload._id)];
         default:
             return state;
     }
@@ -52,7 +52,26 @@ export const favReducer = (state = [], { type, payload }) => {
         case ActionTypes.ADD_FAV:
             return [...state, payload];
         case ActionTypes.REMOVE_FAV:
-            return [...state.filter((s) => s.id != payload.id)];
+            return [...state.filter((s) => s._id != payload._id)];
+        default:
+            return state;
+    }
+}
+
+// Login/SignUp Reducer
+const initialUser = {
+    username: "",
+    token: "",
+    email: "",
+    isAdmin: "",
+    _id: "",
+}
+export const userReducer = (state = initialUser, { type, payload }) => {
+    switch (type) {
+        case ActionTypes.SET_USER:
+            return {...state, ...payload};
+        case ActionTypes.RESET_USER:
+            return {...initialUser};
         default:
             return state;
     }

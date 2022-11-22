@@ -1,9 +1,15 @@
+import { redirect } from 'react-router-dom';
 import fakeStoreApi from '../../apis/fakeStoreApi';
 import { ActionTypes } from '../constants/action-types';
+import { useNavigate } from "react-router-dom";
+
 
 // Fetch all categoery
 export const fetchProducts = () => async (dispatch) => {
     dispatch({ type: ActionTypes.REMOVE_PRODUCT });
+    
+    // const response = await fakeStoreApi.get("http://localhost:8000/api/products/");
+    // console.log(response);
     const response = await fakeStoreApi.get("/products");
     dispatch({ type: ActionTypes.FETCH_PRODUCTS, payload: response.data });
 };
@@ -12,7 +18,7 @@ export const fetchProducts = () => async (dispatch) => {
 export const fetchProductCategory = (categoeryType) => async (dispatch) => {
     dispatch({ type: ActionTypes.REMOVE_PRODUCT });
     console.log("fetch product category type");
-    const response = await fakeStoreApi.get(`/products/category/${categoeryType}`);
+    const response = await fakeStoreApi.get(`/products/categories/${categoeryType}`);
     console.log('response : ', response);
     dispatch({ type: ActionTypes.FETCH_PRODUCTS, payload: response.data });
 }
@@ -77,3 +83,32 @@ export const removeFromFav = (product) => {
         payload: product
     }   
 }
+
+// Login 
+export const login = ({username, password}) => async (dispatch) => {
+
+    console.log("Login User", username);
+  
+    const response = await fakeStoreApi.post(`/auth/login/`, {
+        username,
+        password
+    });
+    // console.log("fetch product", response);
+     dispatch({ type: ActionTypes.SET_USER, payload: response.data });
+     
+};
+// Sign Up
+export const signUp = ({username,email, password}) => async (dispatch) => {
+    const response = await fakeStoreApi.post(`/auth/register/`, {
+        username,
+        email,
+        password
+    });
+    dispatch(login({ username, password }));
+   
+}
+// Logout
+export const logoutHandler = () => async (dispatch) => {
+    dispatch({ type: ActionTypes.RESET_USER });
+}
+

@@ -1,12 +1,47 @@
-import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { useNavigate, redirect } from "react-router-dom";
+import { login } from "../../redux/actions/productAction";
+import { useSelector, useDispatch } from 'react-redux';
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const redirect = () => {
-    navigate('/user/signin/')
+  const redirect = (url) => {
+    navigate(url);
   } 
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    if(user.token)
+      redirect("/");
+  }, [user.token]);
   const [username, setUsername] = useState('');
+  const usernameHandler = (e) => {
+    setUsername(e.target.value);
+  }
   const [password, setPassword] = useState('');
+   const passwordHandler = (e) => {
+    setPassword(e.target.value);
+  }
+  const loginHandler = (e) => {
+    e.preventDefault();
+    // console.log("login call");
+    dispatch(login({ username, password }));
+    // const users = useSelector((state) => state.user);
+    // console.log("login : ", user); // {}
+
+    // redirect("/");
+    // // if (user.token) {
+    // //   redirect("/");
+    // // }
+    
+    // setTimeout(() => {
+    //    if (user.token) {
+    //      console.log("director ");
+    //      navigate("/");
+    //   redirect("/");
+    // }
+    // },1000)
+   
+  }
   return (
     <div className='formContainer'>
       <div class='login'>
@@ -18,7 +53,7 @@ const Login = () => {
             type="text"
             placeholder="User name"
             value={username}
-            onClick={(e) => setUsername(e.target.value)}
+            onChange={(e) => usernameHandler(e)}
           />
           <i class="user icon"></i>
         </div>
@@ -27,13 +62,13 @@ const Login = () => {
             type="password"
             placeholder="Password"
             value={password}
-            onClick={(e) => setPassword(e.target.value)}
+            onChange={(e) => passwordHandler(e)}
           />
             <i class="key icon"></i>
         </div>
         <div class='footer'>
-          <button >Log in</button>
-          <a onClick={redirect}>Create new account?</a>
+          <button onClick={(e) => loginHandler(e)} >Log in</button>
+          <a onClick={(e) => redirect('/user/signin/')}>Create new account?</a>
         </div>
       </div>
       

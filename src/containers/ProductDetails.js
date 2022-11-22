@@ -11,17 +11,20 @@ const ProductDetails = () => {
     // console.log("product details", product);
 
     const dispatch = useDispatch();
-    const id = parseInt(productId);
     const cart = useSelector((state) => state.cart);
-    const fav = useSelector((state) => state.favourite);
-    let cardContains = cart.filter(c => c.id == id );
-    let favContains = fav.filter(c => c.id == id);
+  const fav = useSelector((state) => state.favourite);
+  const user = useSelector((state) => state.user);
+    let cardContains = cart.filter(c => c._id == productId );
+    let favContains = fav.filter(c => c._id == productId);
     console.log(cardContains);
     cardContains = cardContains.length == 0 ? false : true;
     favContains = favContains.length == 0 ? false : true;
     const addToChartHandler = (e) => {
       e.stopPropagation();
       e.preventDefault();
+      if (!user.token) {
+        return;
+      }
       console.log("cart : ", cart);
       if (cardContains) {
         console.log("remove from cart");
@@ -34,6 +37,9 @@ const ProductDetails = () => {
     const addToFavHandler = (e) => {
       e.stopPropagation();
       e.preventDefault();
+      if (!user.token) {
+        return;
+      }
       if (favContains) {
         console.log("remove from fav");
         dispatch(removeFromFav(product));
@@ -49,7 +55,6 @@ const ProductDetails = () => {
     // }
     useEffect(() => {
       if (productId && productId !== "") {
-        console.log("here");
          dispatch(fetchProduct(productId));
       }
           
@@ -86,19 +91,20 @@ const ProductDetails = () => {
                       {/* <div class="ui grid">
                         <div class="three column row "> */}
                     <button
-                          class={`ui toggle button left floated column medium ${cardContains ? 'red' : ""}`}
+                          class={`ui toggle button left floated column medium ${user.token && cardContains ? 'red' : ""}`}
                           onClick={(e) => addToChartHandler(e)}>
                             <i class="shop icon"></i>
                           {
-                            cardContains ? 'remove from cart' : "Add to Cart"
+                          user.token && cardContains ?
+                            'remove from cart' : "Add to Cart"
                           }
                     </button>
                     <button
-                          class={`ui toggle button right floated column medium center ${favContains ? 'teal' : ""}`}
+                          class={`ui toggle button right floated column medium center ${user.token && favContains ? 'teal' : ""}`}
                           onClick={(e) => addToFavHandler(e)}>
-                            <i class={`like icon ${favContains ? 'red': ""}`}></i>
+                        <i class={`like icon ${user.token && favContains ? 'red' : ""}`}></i>
                           {
-                            favContains ? 'remove from favourite' : "Add to favourite"
+                           user.token && favContains ? 'remove from favourite' : "Add to favourite"
                           }
                           </button>
                           {/* </div>

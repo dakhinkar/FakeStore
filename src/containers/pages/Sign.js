@@ -1,13 +1,27 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { login, signUp } from "../../redux/actions/productAction";
 const Sign = () => {
   const navigate = useNavigate();
-  const redirect = () => {
-    navigate('/user/login/')
+  const dispatch = useDispatch();
+  const redirect = (url) => {
+    navigate(url);
   } 
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    if(user.token)
+      redirect("/");
+  }, [user.token])
+   
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const registerHandler = (e) => {
+    e.preventDefault();
+    dispatch(signUp({ username, email, password }));
+  }
   
   return (
     <div className='formContainer'>
@@ -20,7 +34,7 @@ const Sign = () => {
             type="text"
             placeholder="User name"
             value={username}
-            onClick={(e)=> setUsername(e.target.value)}
+            onChange={(e)=> setUsername(e.target.value)}
           />
           <i class="user icon"></i>
         </div>
@@ -29,7 +43,7 @@ const Sign = () => {
             type="email"
             placeholder="Email"
             value={email}
-            onClick={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <i class="envelope icon"></i>
         </div>
@@ -38,13 +52,13 @@ const Sign = () => {
             type="password"
             placeholder="Password"
             value={password}
-            onClick ={(e) => setPassword(e.target.value)}
+            onChange ={(e) => setPassword(e.target.value)}
           />
             <i class="key icon"></i>
         </div>
         <div class='footer'>
-          <button >Sign Up</button>
-          <a onClick={redirect}>Have an account?</a>
+          <button onClick={(e) => registerHandler(e)}>Sign Up</button>
+          <a onClick={(e) => redirect('/user/login/')}>Have an account?</a>
         </div>
       </div>
       

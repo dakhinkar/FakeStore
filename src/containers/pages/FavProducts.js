@@ -16,10 +16,12 @@ const FavProducts = () => {
   //        dispatch(setProducts(favProduct));
        
   //   },[fav])
+  const user = useSelector((state) => state.user);
     return (
       <div className='ui grid container'>
+        
         {
-          fav.length > 0 ?  <ProductComponent data={fav}/> : <p className=''>Favourite List is Empty</p> 
+          user.token && fav.length > 0 ?  <ProductComponent data={fav}/> : <p className=''>Favourite List is Empty</p> 
           
         }
            

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { productReducer, selectedProductReducer, categoryReducer, cartReducer, favReducer } from "./productReducer";
+import { productReducer, selectedProductReducer, categoryReducer, cartReducer, favReducer, userReducer } from "./productReducer";
 
 const reducers = combineReducers({
     allProducts: productReducer,
@@ -7,6 +7,7 @@ const reducers = combineReducers({
     categories: categoryReducer,
     cart: cartReducer,
     favourite: favReducer,
+    user : userReducer
 });
 
 export default reducers;
