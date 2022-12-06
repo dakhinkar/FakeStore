@@ -64,7 +64,7 @@ const ProductDetails = () => {
 
     },[productId])
     return (
-        <div className='ui grid container'>
+        <div className='ui grid container single'>
             {
                 Object.keys(product).length === 0 ? (
                     <div class="ui">

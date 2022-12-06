@@ -2,6 +2,8 @@ import { redirect } from 'react-router-dom';
 import fakeStoreApi from '../../apis/fakeStoreApi';
 import { ActionTypes } from '../constants/action-types';
 import { useNavigate } from "react-router-dom";
+// import axios from 'axios';
+
 
 
 // Fetch all categoery

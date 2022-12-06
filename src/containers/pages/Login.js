@@ -9,10 +9,10 @@ const Login = () => {
     navigate(url);
   } 
   const user = useSelector((state) => state.user);
-  useEffect(() => {
-    if(user.token)
-      redirect("/");
-  }, [user.token]);
+  // useEffect(() => {
+  //   if(user.token)
+  //     redirect("/");
+  // }, [user.token]);
   const [username, setUsername] = useState('');
   const usernameHandler = (e) => {
     setUsername(e.target.value);
